@@ -27,8 +27,8 @@
 
 4.  По указанному объекту потребления выбрать все трансформаторы напряжения с закончившимся сроком поверки
 
-    GET: `/api/consumption-units/{consumption-units-id}/current-meters/expired`
+    GET: `/api/consumption-units/{consumption-units-id}/current-transformers/expired`
 
 5.  По указанному объекту потребления выбрать все трансформаторы тока с закончившимся сроком поверки
 
-    GET: `/api/consumption-units/{consumption-units-id}/voltage-meters/expired`
+    GET: `/api/consumption-units/{consumption-units-id}/voltage-transformers/expired`
