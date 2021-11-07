@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TransNeftEnergoTest.DAL.Models
 {
@@ -14,6 +14,6 @@ namespace TransNeftEnergoTest.DAL.Models
     {
         public int ParentOrganizationID { get; set; }
         public virtual ParentOrganization ParentOrganization { get; set; }
-        public virtual IList<ConsumptionUnit> ConsumptionUnits { get; set; }
+        public virtual IEnumerable<ConsumptionUnit> ConsumptionUnits { get; set; }
 }
 }

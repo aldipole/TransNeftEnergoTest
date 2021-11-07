@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TransNeftEnergoTest.DAL;
 using TransNeftEnergoTest.DAL.Models;
 
@@ -52,19 +53,19 @@ namespace TransNeftEnergoTest.DBInitializer
                                         ElectricityMeter = new ElectricityMeter()
                                         {
                                             Type = ElectricityMeterType.MeterType1,
-                                            VerificationDate = new DateTime(2021, 11, 1)
+                                            ExpiredAt = new DateTime(2021, 9, 1)
                                         },
                                         CurrentTransformer = new CurrentTransformer()
                                         {
                                             Type = CurrentTransformerType.CurrentTransformerType1,
                                             TransformationRatio = 1.12,
-                                            VerificationDate = new DateTime(2021, 11, 2)
+                                            ExpiredAt = new DateTime(2021, 9, 2)
                                         },
                                         VoltageTransformer = new VoltageTransformer()
                                         {
                                             Type = VoltageTransformerType.VoltageTransformerType1,
                                             TransformationRatio = 1.13,
-                                            VerificationDate = new DateTime(2021, 11, 3)
+                                            ExpiredAt = new DateTime(2021, 9, 3)
                                         }
                                     },
                                     new MeasurementPoint()
@@ -73,19 +74,19 @@ namespace TransNeftEnergoTest.DBInitializer
                                         ElectricityMeter = new ElectricityMeter()
                                         {
                                             Type = ElectricityMeterType.MeterType1,
-                                            VerificationDate = new DateTime(2022, 12, 1)
+                                            ExpiredAt = new DateTime(2022, 12, 1)
                                         },
                                         CurrentTransformer = new CurrentTransformer()
                                         {
                                             Type = CurrentTransformerType.CurrentTransformerType2,
                                             TransformationRatio = 1.22,
-                                            VerificationDate = new DateTime(2022, 12, 2)
+                                            ExpiredAt = new DateTime(2022, 12, 2)
                                         },
                                         VoltageTransformer = new VoltageTransformer()
                                         {
                                             Type = VoltageTransformerType.VoltageTransformerType2,
                                             TransformationRatio = 1.23,
-                                            VerificationDate = new DateTime(2022, 12, 3)
+                                            ExpiredAt = new DateTime(2022, 12, 3)
                                         }
                                     }
                                 }
@@ -125,19 +126,19 @@ namespace TransNeftEnergoTest.DBInitializer
                                         ElectricityMeter = new ElectricityMeter()
                                         {
                                             Type = ElectricityMeterType.MeterType1,
-                                            VerificationDate = new DateTime(2021, 11, 1)
+                                            ExpiredAt = new DateTime(2021, 9, 1)
                                         },
                                         CurrentTransformer = new CurrentTransformer()
                                         {
                                             Type = CurrentTransformerType.CurrentTransformerType1,
                                             TransformationRatio = 2.12,
-                                            VerificationDate = new DateTime(2021, 11, 2)
+                                            ExpiredAt = new DateTime(2021, 9, 2)
                                         },
                                         VoltageTransformer = new VoltageTransformer()
                                         {
                                             Type = VoltageTransformerType.VoltageTransformerType1,
                                             TransformationRatio = 2.13,
-                                            VerificationDate = new DateTime(2021, 11, 3)
+                                            ExpiredAt = new DateTime(2021, 9, 3)
                                         }
                                     },
                                     new MeasurementPoint()
@@ -146,19 +147,19 @@ namespace TransNeftEnergoTest.DBInitializer
                                         ElectricityMeter = new ElectricityMeter()
                                         {
                                             Type = ElectricityMeterType.MeterType1,
-                                            VerificationDate = new DateTime(2022, 12, 1)
+                                            ExpiredAt = new DateTime(2022, 12, 1)
                                         },
                                         CurrentTransformer = new CurrentTransformer()
                                         {
                                             Type = CurrentTransformerType.CurrentTransformerType2,
                                             TransformationRatio = 2.22,
-                                            VerificationDate = new DateTime(2022, 12, 2)
+                                            ExpiredAt = new DateTime(2022, 12, 2)
                                         },
                                         VoltageTransformer = new VoltageTransformer()
                                         {
                                             Type = VoltageTransformerType.VoltageTransformerType2,
                                             TransformationRatio = 2.23,
-                                            VerificationDate = new DateTime(2022, 12, 3)
+                                            ExpiredAt = new DateTime(2022, 12, 3)
                                         }
                                     }
                                 }
@@ -169,17 +170,17 @@ namespace TransNeftEnergoTest.DBInitializer
             };
             dbContext.ParentOrganizations.Add(parentOrganization);
 
-            var cu1 = parentOrganization.ChildOrganizations[0].ConsumptionUnits[0];
-            var mp11 = cu1.MeasurementPoints[0];
-            var mp12 = cu1.MeasurementPoints[1];
-            var ad11 = cu1.SupplyPoints[0].AccountingDevice;
-            var ad12 = cu1.SupplyPoints[1].AccountingDevice;
+            var cu1 = parentOrganization.ChildOrganizations.First().ConsumptionUnits.First();
+            var mp11 = cu1.MeasurementPoints.First();
+            var mp12 = cu1.MeasurementPoints.Skip(1).First();
+            var ad11 = cu1.SupplyPoints.First().AccountingDevice;
+            var ad12 = cu1.SupplyPoints.Skip(1).First().AccountingDevice;
 
-            var cu2 = parentOrganization.ChildOrganizations[1].ConsumptionUnits[0];
-            var mp21 = cu2.MeasurementPoints[0];
-            var mp22 = cu2.MeasurementPoints[1];
-            var ad21 = cu2.SupplyPoints[0].AccountingDevice;
-            var ad22 = cu2.SupplyPoints[1].AccountingDevice;
+            var cu2 = parentOrganization.ChildOrganizations.Skip(1).First().ConsumptionUnits.First();
+            var mp21 = cu2.MeasurementPoints.First();
+            var mp22 = cu2.MeasurementPoints.Skip(1).First();
+            var ad21 = cu2.SupplyPoints.First().AccountingDevice;
+            var ad22 = cu2.SupplyPoints.Skip(1).First().AccountingDevice;
 
             dbContext.MeasurementPointToAccountingDevice.AddRange(new List<MeasurementPointToAccountingDevice>{
                 new MeasurementPointToAccountingDevice()

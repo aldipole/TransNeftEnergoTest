@@ -5,9 +5,10 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
-namespace TransNeftEnergoTest
+namespace TransNeftEnergoTest.API
 {
     public class Program
     {
@@ -20,7 +21,10 @@ namespace TransNeftEnergoTest
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    webBuilder.UseStartup<Startup>().UseKestrel(options =>
+                    {
+                        options.ListenAnyIP(8050);
+                    });
                 });
     }
 }

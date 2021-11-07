@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TransNeftEnergoTest.DAL.Models
 {
@@ -12,6 +12,6 @@ namespace TransNeftEnergoTest.DAL.Models
     [Table("ParentOrganization")]
     public class ParentOrganization : Organization
     {
-        public virtual IList<ChildOrganization> ChildOrganizations { get; set; }
+        public virtual IEnumerable<ChildOrganization> ChildOrganizations { get; set; }
     }
 }

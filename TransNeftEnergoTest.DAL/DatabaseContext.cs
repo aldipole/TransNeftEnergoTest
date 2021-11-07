@@ -39,11 +39,11 @@ namespace TransNeftEnergoTest.DAL
                 .WithOne(sp => sp.AccountingDevice);
             modelBuilder.Entity<MeasurementPointToAccountingDevice>()
                 .HasOne(mp2ad => mp2ad.AccountingDevice)
-                .WithOne(ad => ad.MeasurementPointToAccountingDevice)
+                .WithMany(ad => ad.MeasurementPointToAccountingDevice)
                 .OnDelete(DeleteBehavior.Restrict);
             modelBuilder.Entity<MeasurementPointToAccountingDevice>()
                 .HasOne(mp2ad => mp2ad.MeasurementPoint)
-                .WithOne(mp => mp.MeasurementPointToAccountingDevice)
+                .WithMany(mp => mp.MeasurementPointToAccountingDevice)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

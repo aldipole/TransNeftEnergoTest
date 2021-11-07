@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace TransNeftEnergoTest.DAL.Models
 {
     /// <summary>
-    /// Организация
+    /// Обобщенная организация
     /// </summary>
     public abstract class Organization
     {
